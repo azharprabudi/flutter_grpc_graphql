@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+import "general.proto";
+
+service ArticleService {
+    rpc Get(Empty) returns (Articles) {}
+}
+
+message Articles {
+    string status = 1;
+    string totalResults = 2;
+    repeated Article articles = 3;
+}
+
+message Article {
+    Source source = 1;
+    string author = 2;
+    string title = 3;
+    string description = 4;
+    string url = 5;
+    string urlToImage = 6;
+    string publishedAt = 7;
+    string content = 8;
+}
+
+message Source {
+    int32 id = 1;
+    string name = 2;
+}
