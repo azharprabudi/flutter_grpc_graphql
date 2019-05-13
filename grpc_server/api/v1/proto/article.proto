@@ -5,7 +5,8 @@ package proto;
 import "general.proto";
 
 service ArticleService {
-    rpc Get(Empty) returns (Articles) {}
+    rpc Get(ArticlePagination) returns (Articles) {}
+    rpc Bookmark(Article) returns (Empty) {}
 }
 
 message Articles {
@@ -15,7 +16,7 @@ message Articles {
 }
 
 message Article {
-    Source source = 1;
+    ArticleSource source = 1;
     string author = 2;
     string title = 3;
     string description = 4;
@@ -25,7 +26,11 @@ message Article {
     string content = 8;
 }
 
-message Source {
+message ArticleSource {
     int32 id = 1;
     string name = 2;
+}
+
+message ArticlePagination {
+    int32 page = 1;
 }
