@@ -1,5 +1,6 @@
 import 'package:client/api/proto/article.pbgrpc.dart' as ArticleGRPC;
 import 'package:client/blocs/article.dart';
+import 'package:client/blocs/chat.dart';
 import 'package:client/widgets/article/base_item.dart';
 import 'package:client/widgets/article/item_load.dart';
 import 'package:client/widgets/shared/bloc_provider.dart';
@@ -63,7 +64,10 @@ class _ArticleState extends State<Article> {
   void _navigateToChat() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (_) => Chat(),
+        builder: (_) => BlocProvider(
+              bloc: ChatBloc(),
+              child: Chat(),
+            ),
       ),
     );
   }
