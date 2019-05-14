@@ -19,10 +19,11 @@ type ArticleServiceInterface interface {
 
 func (as *ArticleService) Get(page int) (*proto.Articles, error) {
 	_, resp, err := as.http.Get("/top-headlines", &map[string]string{
-		"q":       "sport",
+		"category":       "sports",
 		"country": "id",
 		"apiKey":  configs.API_KEY,
 		"page":    strconv.Itoa(page),
+		"pageSize": "10",
 	}, nil)
 	if err != nil {
 		return nil, err
