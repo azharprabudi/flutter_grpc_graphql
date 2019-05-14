@@ -5,6 +5,8 @@ import 'package:client/widgets/article/item_load.dart';
 import 'package:client/widgets/shared/bloc_provider.dart';
 import 'package:flutter/material.dart';
 
+import 'chat.dart';
+
 class Article extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _ArticleState();
@@ -58,6 +60,14 @@ class _ArticleState extends State<Article> {
         onPressed: () {},
       );
 
+  void _navigateToChat() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => Chat(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,6 +75,12 @@ class _ArticleState extends State<Article> {
         title: Text(
           "Article",
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.message),
+            onPressed: _navigateToChat,
+          ),
+        ],
       ),
       body: StreamBuilder(
         stream: BlocProvider.of<ArticleBloc>(context).articles,
