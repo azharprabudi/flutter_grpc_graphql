@@ -7,10 +7,10 @@ class ArticleBloc {
   int _page;
   ArticleServiceClient _asc;
   BehaviorSubject<int> _obs$;
-  BehaviorSubject<Articles> _articles$;
+  BehaviorSubject<List<Article>> _articles$;
 
   get fetchArticles => _obs$.sink.add;
-  Stream<Articles> get articles => _articles$.stream;
+  Stream<List<Article>> get articles => _articles$.stream;
 
   ArticleBloc() {
     ClientChannel _ch = ClientChannel(
@@ -27,15 +27,22 @@ class ArticleBloc {
 
     _page = 1;
     _obs$ = BehaviorSubject<int>();
-    _articles$ = BehaviorSubject<Articles>();
+    _articles$ = BehaviorSubject<List<Article>>();
 
     _obs$
         .debounce(Duration(milliseconds: 250))
         .exhaustMap((_) => _getArticles(_page))
+        .map((resp) => resp.articles)
         .listen(
-      (Articles resp) {
+      (List<Article> resp) {
         _page += 1;
-        _articles$.sink.add(resp);
+
+        if (_articles$.value == null) {
+          _articles$.sink.add(resp);
+          return;
+        }
+
+        _articles$.sink.add(_articles$.value..addAll(resp));
       },
       onError: (err) {
         print("Error from app: $err");

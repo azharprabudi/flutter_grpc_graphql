@@ -1,10 +1,9 @@
-import 'package:client/api/proto/article.pbgrpc.dart';
+import 'package:client/api/proto/article.pbgrpc.dart' as ArticleGRPC;
 import 'package:client/blocs/article.dart';
 import 'package:client/widgets/article/base_item.dart';
 import 'package:client/widgets/article/item_load.dart';
 import 'package:client/widgets/shared/bloc_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 
 class Article extends StatefulWidget {
   @override
@@ -12,6 +11,13 @@ class Article extends StatefulWidget {
 }
 
 class _ArticleState extends State<Article> {
+  ScrollController _lsController;
+
+  _ArticleState() {
+    _lsController = ScrollController();
+    _lsController.addListener(_onScroll);
+  }
+
   @override
   void initState() {
     super.initState();
@@ -22,6 +28,19 @@ class _ArticleState extends State<Article> {
   void dispose() {
     super.dispose();
     BlocProvider.of<ArticleBloc>(context).dispose();
+  }
+
+  bool _isPositionEnd() {
+    double range =
+        _lsController.offset - _lsController.position.maxScrollExtent;
+    double distanceToScrollEnd = -250;
+    return range >= distanceToScrollEnd;
+  }
+
+  void _onScroll() {
+    if (_isPositionEnd()) {
+      BlocProvider.of<ArticleBloc>(context).fetchArticles(1);
+    }
   }
 
   Widget _itemLoadBuilder(BuildContext _, int __) => ItemLoad();
@@ -49,7 +68,8 @@ class _ArticleState extends State<Article> {
       ),
       body: StreamBuilder(
         stream: BlocProvider.of<ArticleBloc>(context).articles,
-        builder: (BuildContext ctx, AsyncSnapshot<Articles> snapshot) {
+        builder: (BuildContext ctx,
+            AsyncSnapshot<List<ArticleGRPC.Article>> snapshot) {
           if (snapshot.data == null) {
             return ListView.builder(
               itemCount: 6,
@@ -58,10 +78,11 @@ class _ArticleState extends State<Article> {
           }
 
           return ListView.builder(
-            itemCount: snapshot.data.articles.length,
+            controller: _lsController,
+            itemCount: snapshot.data.length,
             itemBuilder: (BuildContext _, int index) => _itemBuilder(
-                  title: snapshot.data.articles[index].title,
-                  image: snapshot.data.articles[index].urlToImage,
+                  title: snapshot.data[index].title,
+                  image: snapshot.data[index].urlToImage,
                 ),
           );
         },
