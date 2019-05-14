@@ -18,7 +18,7 @@ type ArticleServiceInterface interface {
 }
 
 func (as *ArticleService) Get(page int) (*proto.Articles, error) {
-	_, resp, err := as.http.Get("/everything", &map[string]string{
+	_, resp, err := as.http.Get("/top-headlines", &map[string]string{
 		"q":       "sport",
 		"country": "id",
 		"apiKey":  configs.API_KEY,
