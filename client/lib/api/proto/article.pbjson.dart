@@ -8,7 +8,7 @@ const Articles$json = const {
   '1': 'Articles',
   '2': const [
     const {'1': 'status', '3': 1, '4': 1, '5': 9, '10': 'status'},
-    const {'1': 'totalResults', '3': 2, '4': 1, '5': 9, '10': 'totalResults'},
+    const {'1': 'totalResults', '3': 2, '4': 1, '5': 5, '10': 'totalResults'},
     const {'1': 'articles', '3': 3, '4': 3, '5': 11, '6': '.proto.Article', '10': 'articles'},
   ],
 };

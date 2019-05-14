@@ -11,7 +11,7 @@ import 'package:protobuf/protobuf.dart' as $pb;
 class Articles extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('Articles', package: const $pb.PackageName('proto'))
     ..aOS(1, 'status')
-    ..aOS(2, 'totalResults')
+    ..a<$core.int>(2, 'totalResults', $pb.PbFieldType.O3)
     ..pc<Article>(3, 'articles', $pb.PbFieldType.PM,Article.create)
     ..hasRequiredFields = false
   ;
@@ -33,8 +33,8 @@ class Articles extends $pb.GeneratedMessage {
   $core.bool hasStatus() => $_has(0);
   void clearStatus() => clearField(1);
 
-  $core.String get totalResults => $_getS(1, '');
-  set totalResults($core.String v) { $_setString(1, v); }
+  $core.int get totalResults => $_get(1, 0);
+  set totalResults($core.int v) { $_setSignedInt32(1, v); }
   $core.bool hasTotalResults() => $_has(1);
   void clearTotalResults() => clearField(2);
 

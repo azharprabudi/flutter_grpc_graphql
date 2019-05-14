@@ -11,7 +11,7 @@ service ArticleService {
 
 message Articles {
     string status = 1;
-    string totalResults = 2;
+    int32 totalResults = 2;
     repeated Article articles = 3;
 }
 
