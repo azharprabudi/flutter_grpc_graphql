@@ -29,6 +29,10 @@ class ArticleBloc {
     _obs$ = BehaviorSubject<int>();
     _articles$ = BehaviorSubject<List<Article>>();
 
+    _addListenerFetchArticle();
+  }
+
+  void _addListenerFetchArticle() {
     _obs$
         .debounce(Duration(milliseconds: 250))
         .exhaustMap((_) => _getArticles(_page))
