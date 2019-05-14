@@ -25,15 +25,22 @@ class ArticleBloc {
       _ch,
     );
 
+    _page = 1;
     _obs$ = BehaviorSubject<int>();
     _articles$ = BehaviorSubject<Articles>();
 
-    _obs$.concatMap((_) => _getArticles(_page)).listen(
+    _obs$
+        .debounce(Duration(milliseconds: 250))
+        .exhaustMap((_) => _getArticles(_page))
+        .listen(
       (Articles resp) {
         _page += 1;
         _articles$.sink.add(resp);
       },
-      onError: (err) => _articles$.sink.addError(err),
+      onError: (err) {
+        print("Error from app: $err");
+        _articles$.sink.addError(err);
+      },
       cancelOnError: true,
     );
   }
