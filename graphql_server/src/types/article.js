@@ -20,10 +20,6 @@ const ArticleType = `
         id: String
         name: String
     }
-
-    type ArticlePagination {
-        page: Int
-    }
 `;
 
 module.exports = ArticleType;

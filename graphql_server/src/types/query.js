@@ -1,6 +1,6 @@
 const Query = `
     type Query {
-        articles: Articles
+        articles(page: Int): Articles
     }
 `;
 
