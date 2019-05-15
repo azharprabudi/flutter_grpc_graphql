@@ -13,6 +13,8 @@ const QueryResolver = require("./resolvers/query");
 
 // datasource
 const ArticleAPI = require("./datasources/article");
+const PostAPI = require("./datasources/post");
+const CommentAPI = require("./datasources/comment");
 
 // grpc service
 const articleGRPC = require("./grpc/article/article");
@@ -31,7 +33,9 @@ const server = new ApolloServer({
   }),
   playground: configs.FGG_NODE_ENV != "production",
   dataSources: () => ({
-    articleAPI: new ArticleAPI()
+    articleAPI: new ArticleAPI(),
+    postAPI: new PostAPI(),
+    commentAPI: new CommentAPI()
   })
 });
 
