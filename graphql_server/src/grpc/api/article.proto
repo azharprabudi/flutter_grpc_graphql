@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package proto;
+
+import "general.proto";
+
+service ArticleService {
+    rpc Get(ArticlePagination) returns (Articles) {}
+    rpc Bookmark(Article) returns (Empty) {}
+}
+
+message Articles {
+    string status = 1;
+    int32 totalResults = 2;
+    repeated Article articles = 3;
+}
+
+message Article {
+    ArticleSource source = 1;
+    string author = 2;
+    string title = 3;
+    string description = 4;
+    string url = 5;
+    string urlToImage = 6;
+    string publishedAt = 7;
+    string content = 8;
+}
+
+message ArticleSource {
+    int32 id = 1;
+    string name = 2;
+}
+
+message ArticlePagination {
+    int32 page = 1;
+}
