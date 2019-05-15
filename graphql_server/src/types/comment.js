@@ -1,8 +1,4 @@
 const CommentType = `
-    type Comments {
-        comments: [Comment]
-    }
-
     type Comment {
         postId: Int
         id: Int

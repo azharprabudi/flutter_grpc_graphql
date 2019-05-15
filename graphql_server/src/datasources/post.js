@@ -9,14 +9,27 @@ class PostAPI extends RESTDataSource {
   }
 
   get progressLoader() {
-    return new DataLoader(async () => {
+    return new DataLoader(async key => {
       const resp = await this.get("/posts");
+
+      return [resp];
+    });
+  }
+
+  get postProgressLoader() {
+    return new DataLoader(async id => {
+      const resp = await this.get(`/posts/${id}`);
+
       return [resp];
     });
   }
 
   async getPosts() {
-    return await this.progressLoader.load();
+    return await this.progressLoader.load(new Date().getTime());
+  }
+
+  async getPost(postId) {
+    return await this.postProgressLoader.load(postId);
   }
 }
 
