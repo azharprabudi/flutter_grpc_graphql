@@ -2,8 +2,8 @@ const GRPC_SCREEN = "GRPC_SCREEN";
 const GRAPHQL_SCREEN = "GRAPHQL_SCREEN";
 
 const _features = {
-  GRPC_SCREEN: true,
-  GRAPHQL_SCREEN: false,
+  GRPC_SCREEN: false,
+  GRAPHQL_SCREEN: true,
 };
 
 bool isFeatureAvailable(String key) =>
