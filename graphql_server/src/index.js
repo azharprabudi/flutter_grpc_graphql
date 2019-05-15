@@ -5,6 +5,8 @@ const { RedisCache } = require("apollo-server-cache-redis");
 // typedef
 const QueryType = require("./types/query");
 const ArticleType = require("./types/article");
+const PostType = require("./types/post");
+const CommentType = require("./types/comment");
 
 // resolver
 const QueryResolver = require("./resolvers/query");
@@ -20,7 +22,7 @@ const configs = require("./configs/configs");
 
 const server = new ApolloServer({
   schema: makeExecutableSchema({
-    typeDefs: [QueryType, ArticleType],
+    typeDefs: [QueryType, ArticleType, PostType, CommentType],
     resolvers: QueryResolver({ articleGRPC })
   }),
   cache: new RedisCache({
