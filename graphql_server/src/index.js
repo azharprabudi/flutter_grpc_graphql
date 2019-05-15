@@ -12,16 +12,19 @@ const QueryResolver = require("./resolvers/query");
 // datasource
 const ArticleAPI = require("./datasources/article");
 
+// utils
+const configs = require("./configs/configs");
+
 const server = new ApolloServer({
   schema: makeExecutableSchema({
     typeDefs: [QueryType, ArticleType],
     resolvers: QueryResolver
   }),
   cache: new RedisCache({
-    host: "127.0.0.1",
-    port: 6379
+    host: configs.FGG_REDIS_HOST,
+    port: configs.FGG_REDIS_PORT
   }),
-  playground: process.env.NODE_ENV != "production",
+  playground: configs.FGG_NODE_ENV != "production",
   dataSources: () => ({
     articleAPI: new ArticleAPI()
   })
@@ -29,6 +32,6 @@ const server = new ApolloServer({
 
 server
   .listen({
-    port: process.env.PORT || "9669"
+    port: configs.FGG_GRAPHQL_PORT
   })
   .then(({ url }) => console.log(`Your graphql server already run at ${url}`));

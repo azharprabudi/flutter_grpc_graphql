@@ -1,19 +1,20 @@
 const { RESTDataSource } = require("apollo-datasource-rest");
 const DataLoader = require("dataloader");
+const configs = require("../configs/configs");
 
 class ArticleAPI extends RESTDataSource {
   constructor() {
     super();
-    this.baseURL = "https://newsapi.org/v2";
+    this.baseURL = "https://newsapi.org";
   }
 
   get progressLoader() {
     return new DataLoader(async page => {
-      const resp = await this.get("/top-headlines", {
+      const resp = await this.get("v2/top-headlines", {
         page,
         country: "id",
         category: "sports",
-        apiKey: "c6f23162e2f8454f8a87763a5c9d7fca"
+        apiKey: configs.FGG_NEWS_API_KEY
       });
 
       return [resp];
