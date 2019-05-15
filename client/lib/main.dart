@@ -1,24 +1,27 @@
-import 'package:client/blocs/article.dart';
-import 'package:client/pages/grpc/article.dart';
+import 'package:client/pages/article_graphql/container.dart';
+import 'package:client/pages/article_grpc/container.dart';
 import 'package:client/utils/flag.dart';
-import 'package:client/widgets/shared/bloc_provider.dart';
 import 'package:flutter/material.dart';
 
-Widget _baseScreen(Widget _defaultScreen) => MaterialApp(
-      home: _defaultScreen,
-    );
+class App extends StatelessWidget {
+  Widget get _build {
+    if (isFeatureAvailable(GRPC_SCREEN)) {
+      return ContainerArticleGrpc();
+    }
 
-void main() => runApp(
-      (() {
-        if (isFeatureAvailable(GRPC_SCREEN)) {
-          return _baseScreen(
-            BlocProvider<ArticleBloc>(
-              bloc: ArticleBloc(),
-              child: Article(),
-            ),
-          );
-        }
+    if (isFeatureAvailable(GRAPHQL_SCREEN)) {
+      return ContainerArticleGraphQL();
+    }
 
-        return _baseScreen(Article());
-      })(),
+    return null;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: _build,
     );
+  }
+}
+
+void main() => runApp(App());

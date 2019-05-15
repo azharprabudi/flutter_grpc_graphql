@@ -1,22 +1,22 @@
-import 'package:client/api/proto/article.pbgrpc.dart' as ArticleGRPC;
-import 'package:client/blocs/grpc/article.dart';
-import 'package:client/blocs/grpc/chat.dart';
+import 'package:client/api/proto/article.pbgrpc.dart';
+import 'package:client/pages/article_grpc/bloc/article.dart';
+import 'package:client/pages/chat_grpc/bloc/chat.dart';
+import 'package:client/pages/chat_grpc/container.dart';
+import 'package:client/pages/chat_grpc/screen.dart';
 import 'package:client/widgets/article/base_item.dart';
 import 'package:client/widgets/article/item_load.dart';
 import 'package:client/widgets/shared/bloc_provider.dart';
 import 'package:flutter/material.dart';
 
-import 'chat.dart';
-
-class Article extends StatefulWidget {
+class ArticleGrpc extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _ArticleState();
+  State<StatefulWidget> createState() => _ArticleGrpcState();
 }
 
-class _ArticleState extends State<Article> {
+class _ArticleGrpcState extends State<ArticleGrpc> {
   ScrollController _lsController;
 
-  _ArticleState() {
+  _ArticleGrpcState() {
     _lsController = ScrollController();
     _lsController.addListener(_onScroll);
   }
@@ -24,13 +24,13 @@ class _ArticleState extends State<Article> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<ArticleBloc>(context).fetchArticles(1);
+    BlocProvider.of<ArticleGrpcBloc>(context).fetchArticles(1);
   }
 
   @override
   void dispose() {
     super.dispose();
-    BlocProvider.of<ArticleBloc>(context).dispose();
+    BlocProvider.of<ArticleGrpcBloc>(context).dispose();
   }
 
   bool _isPositionEnd() {
@@ -42,7 +42,7 @@ class _ArticleState extends State<Article> {
 
   void _onScroll() {
     if (_isPositionEnd()) {
-      BlocProvider.of<ArticleBloc>(context).fetchArticles(1);
+      BlocProvider.of<ArticleGrpcBloc>(context).fetchArticles(1);
     }
   }
 
@@ -64,10 +64,7 @@ class _ArticleState extends State<Article> {
   void _navigateToChat() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (_) => BlocProvider(
-              bloc: ChatBloc(),
-              child: Chat(),
-            ),
+        builder: (_) => ContainerChatGrpc(),
       ),
     );
   }
@@ -87,9 +84,8 @@ class _ArticleState extends State<Article> {
         ],
       ),
       body: StreamBuilder(
-        stream: BlocProvider.of<ArticleBloc>(context).articles,
-        builder: (BuildContext ctx,
-            AsyncSnapshot<List<ArticleGRPC.Article>> snapshot) {
+        stream: BlocProvider.of<ArticleGrpcBloc>(context).articles,
+        builder: (BuildContext ctx, AsyncSnapshot<List<Article>> snapshot) {
           if (snapshot.data == null) {
             return ListView.builder(
               itemCount: 6,

@@ -3,7 +3,7 @@ import 'package:grpc/grpc.dart';
 import 'package:grpc/service_api.dart';
 import 'package:rxdart/rxdart.dart';
 
-class ArticleBloc {
+class ArticleGrpcBloc {
   int _page;
   ArticleServiceClient _asc;
   BehaviorSubject<int> _obs$;
@@ -12,7 +12,7 @@ class ArticleBloc {
   get fetchArticles => _obs$.sink.add;
   Stream<List<Article>> get articles => _articles$.stream;
 
-  ArticleBloc() {
+  ArticleGrpcBloc() {
     ClientChannel _ch = ClientChannel(
       "192.168.0.103",
       port: 6969,

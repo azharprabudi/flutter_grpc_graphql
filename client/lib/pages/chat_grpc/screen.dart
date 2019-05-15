@@ -1,21 +1,21 @@
-import 'package:client/blocs/grpc/chat.dart';
+import 'package:client/api/proto/chat.pbgrpc.dart';
+import 'package:client/pages/chat_grpc/bloc/chat.dart';
 import 'package:client/widgets/shared/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:client/api/proto/chat.pbgrpc.dart' as ChatGrpc;
 
-class Chat extends StatefulWidget {
+class ChatGrpc extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _ChatState();
+  State<StatefulWidget> createState() => _ChatGrpcState();
 }
 
-class _ChatState extends State<Chat> {
+class _ChatGrpcState extends State<ChatGrpc> {
   void _onChangedName(String name) {
-    BlocProvider.of<ChatBloc>(context).onChangeName(name);
+    BlocProvider.of<ChatGrpcBloc>(context).onChangeName(name);
   }
 
   void _onChangedMessage(String message) {
-    BlocProvider.of<ChatBloc>(context).onChangeMessage(message);
+    BlocProvider.of<ChatGrpcBloc>(context).onChangeMessage(message);
   }
 
   Widget _itemBuilder({@required String name, @required String message}) {
@@ -23,7 +23,7 @@ class _ChatState extends State<Chat> {
   }
 
   void _onPressed() {
-    BlocProvider.of<ChatBloc>(context).onSubmit(1);
+    BlocProvider.of<ChatGrpcBloc>(context).onSubmit(1);
   }
 
   @override
@@ -61,10 +61,10 @@ class _ChatState extends State<Chat> {
                 child: Text('Submit'),
               ),
             ),
-            StreamBuilder<List<ChatGrpc.Chat>>(
-              stream: BlocProvider.of<ChatBloc>(context).messages,
-              builder: (BuildContext context,
-                  AsyncSnapshot<List<ChatGrpc.Chat>> snapshot) {
+            StreamBuilder<List<Chat>>(
+              stream: BlocProvider.of<ChatGrpcBloc>(context).messages,
+              builder:
+                  (BuildContext context, AsyncSnapshot<List<Chat>> snapshot) {
                 if (!snapshot.hasData) {
                   return Container();
                 }

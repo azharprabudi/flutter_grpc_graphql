@@ -3,7 +3,7 @@ import 'package:grpc/grpc.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
 
-class ChatBloc {
+class ChatGrpcBloc {
   ChatServiceClient _csc;
   ResponseStream<Chat> _cc;
 
@@ -18,7 +18,7 @@ class ChatBloc {
 
   Stream<List<Chat>> get messages => _messages$.stream;
 
-  ChatBloc() {
+  ChatGrpcBloc() {
     ClientChannel _ch = ClientChannel(
       "192.168.0.103",
       port: 6969,
