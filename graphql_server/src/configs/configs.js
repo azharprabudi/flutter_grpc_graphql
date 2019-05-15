@@ -4,7 +4,7 @@ const configs = {
   FGG_REDIS_PORT: process.env.FGG_REDIS_PORT || 6379,
   FGG_NEWS_API_KEY: process.env.FGG_NEWS_API_KEY || "rahasia",
   FGG_GRAPHQL_PORT: process.env.FGG_GRAPHQL_PORT || 9669,
-  FGG_GRPC_ADDRESS: process.env.FGG_GRPC_ADDRESS || "http://127.0.0.1:6969"
+  FGG_GRPC_ADDRESS: process.env.FGG_GRPC_ADDRESS || "localhost:6969"
 };
 
 module.exports = configs;

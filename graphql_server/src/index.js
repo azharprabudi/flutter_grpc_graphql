@@ -12,13 +12,16 @@ const QueryResolver = require("./resolvers/query");
 // datasource
 const ArticleAPI = require("./datasources/article");
 
+// grpc service
+const articleGRPC = require("./grpc/article/article");
+
 // utils
 const configs = require("./configs/configs");
 
 const server = new ApolloServer({
   schema: makeExecutableSchema({
     typeDefs: [QueryType, ArticleType],
-    resolvers: QueryResolver
+    resolvers: QueryResolver({ articleGRPC })
   }),
   cache: new RedisCache({
     host: configs.FGG_REDIS_HOST,
