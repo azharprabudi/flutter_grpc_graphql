@@ -1,4 +1,5 @@
 import 'package:client/pages/article_graphql/container.dart';
+import 'package:client/pages/article_graphql_bloc/container.dart';
 import 'package:client/pages/article_grpc/container.dart';
 import 'package:client/utils/flag.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class App extends StatelessWidget {
       return ContainerArticleGraphQL();
     }
 
-    return null;
+    return ContainerGraphQLBloc();
   }
 
   @override

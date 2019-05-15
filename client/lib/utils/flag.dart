@@ -4,8 +4,8 @@ const GRAPHQL_BLOC_SCREEN = "GRAPHQL_BLOC_SCREEN";
 
 const _features = {
   GRPC_SCREEN: false,
-  GRAPHQL_SCREEN: true,
-  GRAPHQL_BLOC_SCREEN: false,
+  GRAPHQL_SCREEN: false,
+  GRAPHQL_BLOC_SCREEN: true,
 };
 
 bool isFeatureAvailable(String key) =>
