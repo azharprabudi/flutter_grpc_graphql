@@ -1,6 +1,6 @@
 import 'package:client/api/proto/article.pbgrpc.dart' as ArticleGRPC;
-import 'package:client/blocs/article.dart';
-import 'package:client/blocs/chat.dart';
+import 'package:client/blocs/grpc/article.dart';
+import 'package:client/blocs/grpc/chat.dart';
 import 'package:client/widgets/article/base_item.dart';
 import 'package:client/widgets/article/item_load.dart';
 import 'package:client/widgets/shared/bloc_provider.dart';

@@ -1,4 +1,4 @@
-import 'package:client/blocs/chat.dart';
+import 'package:client/blocs/grpc/chat.dart';
 import 'package:client/widgets/shared/bloc_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
