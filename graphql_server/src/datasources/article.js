@@ -9,6 +9,7 @@ class ArticleAPI extends RESTDataSource {
 
   progressLoader = new DataLoader(async page => {
     const resp = await this.get("/top-headlines", {
+      page,
       country: "id",
       category: "sports",
       apiKey: "c6f23162e2f8454f8a87763a5c9d7fca"
