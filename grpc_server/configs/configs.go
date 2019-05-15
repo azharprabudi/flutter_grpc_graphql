@@ -1,6 +1,8 @@
 package configs
 
-import "os"
+import (
+	"os"
+)
 
 var config = map[string]string{
 	"FGG_PORT":             "6969",
@@ -12,7 +14,7 @@ var config = map[string]string{
 func Get(key string) string {
 	res := os.Getenv(key)
 	if res == "" {
-		return config[res]
+		return config[key]
 	}
 
 	return res
