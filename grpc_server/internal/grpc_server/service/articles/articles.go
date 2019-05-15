@@ -18,11 +18,11 @@ type ArticleServiceInterface interface {
 }
 
 func (as *ArticleService) Get(page int) (*proto.Articles, error) {
-	_, resp, err := as.http.Get("/top-headlines", &map[string]string{
-		"category":       "sports",
-		"country": "id",
-		"apiKey":  configs.API_KEY,
-		"page":    strconv.Itoa(page),
+	_, resp, err := as.http.Get("/v2/top-headlines", &map[string]string{
+		"category": "sports",
+		"country":  "id",
+		"apiKey":   configs.Get("FGG_NEWS_API_KEY"),
+		"page":     strconv.Itoa(page),
 		"pageSize": "10",
 	}, nil)
 	if err != nil {
@@ -39,6 +39,6 @@ func (as *ArticleService) Get(page int) (*proto.Articles, error) {
 
 func NewArticleService() ArticleServiceInterface {
 	return &ArticleService{
-		http: fazzcloud.NewHTTPClient(configs.BASEURL_ARTICLES),
+		http: fazzcloud.NewHTTPClient(configs.Get("FGG_NEWS_API_BASEURL")),
 	}
 }

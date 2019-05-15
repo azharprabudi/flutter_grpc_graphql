@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	address := fmt.Sprintf(":%d", configs.PORT)
+	address := fmt.Sprintf(":%s", configs.Get("FGG_PORT"))
 	listener, err := net.Listen("tcp", address)
 	if err != nil {
 		log.Print(err)
