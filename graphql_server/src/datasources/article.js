@@ -16,7 +16,7 @@ class ArticleAPI extends RESTDataSource {
         apiKey: "c6f23162e2f8454f8a87763a5c9d7fca"
       });
 
-      return resp.data;
+      return [resp];
     });
   }
 

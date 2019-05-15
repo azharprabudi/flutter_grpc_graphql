@@ -1,6 +1,8 @@
 const resolvers = {
   Query: {
-    articles: (_, { page }) => {}
+    articles: async (_, { page }, { dataSources: { articleAPI } }) => {
+      return await articleAPI.getArticle(page);
+    }
   }
 };
 
