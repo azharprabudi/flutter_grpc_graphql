@@ -37,7 +37,7 @@ const server = new ApolloServer({
     host: configs.FGG_REDIS_HOST,
     port: configs.FGG_REDIS_PORT
   }),
-  playground: configs.FGG_NODE_ENV != "production",
+  playground: configs.FGG_NODE_ENV == "production",
   dataSources: () => ({
     articleAPI: new ArticleAPI(),
     postAPI: new PostAPI(),
