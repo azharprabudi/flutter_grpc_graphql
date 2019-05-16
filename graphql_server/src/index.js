@@ -22,6 +22,8 @@ const articleGRPC = require("./grpc/article/article");
 // mock
 const ArticlesMock = require("./mocks/articles");
 const ArticleMock = require("./mocks/article");
+const PostMock = require("./mocks/post");
+const CommentMock = require("./mocks/comment");
 
 // utils
 const configs = require("./configs/configs");
@@ -41,10 +43,15 @@ const server = new ApolloServer({
     postAPI: new PostAPI(),
     commentAPI: new CommentAPI()
   }),
-  mocks: {
-    Articles: ArticlesMock,
-    Article: ArticleMock
-  }
+  mocks:
+    configs.FGG_NODE_ENV == "development"
+      ? {
+          Articles: ArticlesMock,
+          Article: ArticleMock,
+          Post: PostMock,
+          Comment: CommentMock
+        }
+      : false
 });
 
 server
