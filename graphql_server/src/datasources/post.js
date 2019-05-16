@@ -8,28 +8,12 @@ class PostAPI extends RESTDataSource {
     this.baseURL = configs.FGG_POST_BASEURL;
   }
 
-  get progressLoader() {
-    return new DataLoader(async key => {
-      const resp = await this.get("/posts");
-
-      return [resp];
-    });
-  }
-
-  get postProgressLoader() {
-    return new DataLoader(async id => {
-      const resp = await this.get(`/posts/${id}`);
-
-      return [resp];
-    });
-  }
-
   async getPosts() {
-    return await this.progressLoader.load(new Date().getTime());
+    return await this.get("/posts");
   }
 
   async getPost(postId) {
-    return await this.postProgressLoader.load(postId);
+    return await this.get(`/posts/${id}`);
   }
 }
 
