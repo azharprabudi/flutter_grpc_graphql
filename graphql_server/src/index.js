@@ -19,6 +19,9 @@ const CommentAPI = require("./datasources/comment");
 // grpc service
 const articleGRPC = require("./grpc/article/article");
 
+// mock
+const ArticlesMock = require("./mocks/articles");
+
 // utils
 const configs = require("./configs/configs");
 
@@ -36,7 +39,10 @@ const server = new ApolloServer({
     articleAPI: new ArticleAPI(),
     postAPI: new PostAPI(),
     commentAPI: new CommentAPI()
-  })
+  }),
+  mocks: {
+    Articles: ArticlesMock
+  }
 });
 
 server
