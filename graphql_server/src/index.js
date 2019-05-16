@@ -21,6 +21,7 @@ const articleGRPC = require("./grpc/article/article");
 
 // mock
 const ArticlesMock = require("./mocks/articles");
+const ArticleMock = require("./mocks/article");
 
 // utils
 const configs = require("./configs/configs");
@@ -41,7 +42,8 @@ const server = new ApolloServer({
     commentAPI: new CommentAPI()
   }),
   mocks: {
-    Articles: ArticlesMock
+    Articles: ArticlesMock,
+    Article: ArticleMock
   }
 });
 

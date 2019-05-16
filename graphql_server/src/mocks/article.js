@@ -1,6 +1,6 @@
 const faker = require("faker");
 
-const ArticleMock = {
+const ArticleMock = () => ({
   source: {
     id: null,
     name: ""
@@ -12,6 +12,6 @@ const ArticleMock = {
   urlToImage: faker.image.image(),
   publishedAt: faker.date.recent().toString(),
   content: faker.lorem.text()
-};
+});
 
 module.exports = ArticleMock;
